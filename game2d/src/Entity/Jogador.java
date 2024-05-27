@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Jogador extends Entity {
@@ -30,33 +31,33 @@ public class Jogador extends Entity {
     }
     public void getJogadorImage() {
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/jogador/boy_right_2.png"));
+            up1 = ImageIO.read(new File("game2d/res/jogador/boy_up_1.png"));
+            up2 = ImageIO.read(new File("game2d/res/jogador/boy_up_2.png"));
+            down1 = ImageIO.read(new File("game2d/res/jogador/boy_down_1.png"));
+            down2 = ImageIO.read(new File("game2d/res/jogador/boy_down_2.png"));
+            left1 = ImageIO.read(new File("game2d/res/jogador/boy_left_1.png"));
+            left2 = ImageIO.read(new File("game2d/res/jogador/boy_left_2.png"));
+            right1 = ImageIO.read(new File("game2d/res/jogador/boy_right_1.png"));
+            right2 = ImageIO.read(new File("game2d/res/jogador/boy_right_2.png"));
 
         } catch(IOException e) {
             e.printStackTrace();
         }
     }
     public void update() {
-        if(keyH.upPressed == true) {
+        if(keyH.upPressed) {
             direction = "up";
             y -= speed;
         }
-        else if(keyH.downPressed == true) {
+        else if(keyH.downPressed) {
             direction = "down";
             y += speed;
         }
-        else if(keyH.leftPressed == true) {
+        else if(keyH.leftPressed) {
             direction = "left";
             x -= speed;
         }
-        else if(keyH.rightPressed == true) {
+        else if(keyH.rightPressed) {
             direction = "right";
             x += speed;
         }
