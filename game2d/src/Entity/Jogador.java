@@ -38,6 +38,7 @@ public class Jogador extends Entity {
     }
     public void getJogadorImage() {
         try {
+            //mostrando mudança
             up1 = ImageIO.read(new File("game2d/res/jogador/boy_up_1.png"));
             up2 = ImageIO.read(new File("game2d/res/jogador/boy_up_2.png"));
             down1 = ImageIO.read(new File("game2d/res/jogador/boy_down_1.png"));
