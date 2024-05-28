@@ -18,7 +18,7 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
 
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    public int screenWidth = tileSize * maxScreenCol; // 768 pixels
+    public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
     //FPS
