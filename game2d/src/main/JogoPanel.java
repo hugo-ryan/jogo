@@ -1,7 +1,7 @@
 package main;
 
 import Entity.Jogador;
-import bloco.BlocoGer;
+import bloco.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,24 +10,30 @@ import java.awt.event.KeyListener;
 
 public class JogoPanel extends JPanel implements Runnable, KeyListener {
 
-    // configuracoes da tela
+    //TELA
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 3;
 
     public final int tileSize = originalTileSize * scale; // 48x48 tile
-
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 768 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 576 pixels
 
+
+    //MUNDO
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight= tileSize * maxWorldRow;
+
     //FPS
     int FPS = 60;
 
-    BlocoGer blocoG = new BlocoGer(this);
+    TileManager tileManager = new TileManager(this);
     Movimentar keyH = new Movimentar();
     Thread gameThread;
-    Jogador jogador = new Jogador(this, keyH);
+    public Jogador jogador = new Jogador(this, keyH);
 
     public JogoPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -120,7 +126,7 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
 
         Graphics2D g2 = (Graphics2D)g;
 
-        blocoG.draw(g2);
+        TileManager.draw(g2);
 
         jogador.draw(g2);
 
