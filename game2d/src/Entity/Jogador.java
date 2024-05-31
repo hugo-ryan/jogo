@@ -14,8 +14,8 @@ public class Jogador extends Entity {
     JogoPanel gp;
     Movimentar keyH;
 
-    public final int screenX;
-    public final int screenY;
+    public int screenX;
+    public int screenY;
 
 
     public Jogador (JogoPanel gp, Movimentar keyH) {
@@ -53,33 +53,36 @@ public class Jogador extends Entity {
         }
     }
     public void update() {
-        if(keyH.upPressed) {
-            direction = "up";
-            worldY -= speed;
-        }
-        else if(keyH.downPressed) {
-            direction = "down";
-            worldY += speed;
-        }
-        else if(keyH.leftPressed) {
-            direction = "left";
-            worldX -= speed;
-        }
-        else if(keyH.rightPressed) {
-            direction = "right";
-            worldX += speed;
+        if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed){ //Fazer ele parar a animação se não estiver se mexendo.
+            if(keyH.upPressed) {
+                direction = "up";
+                worldY -= speed;
+            }
+            else if(keyH.downPressed) {
+                direction = "down";
+                worldY += speed;
+            }
+            else if(keyH.leftPressed) {
+                direction = "left";
+                worldX -= speed;
+            }
+            else if(keyH.rightPressed) {
+                direction = "right";
+                worldX += speed;
+            }
+
+            spriteCounter++;
+            if(spriteCounter > 10) {
+                if(spritNum ==1) {
+                    spritNum = 2;
+                }
+                else if(spritNum == 2) {
+                    spritNum = 1;
+                }
+                spriteCounter = 0;
+            }
         }
 
-        spriteCounter++;
-        if(spriteCounter > 10) {
-            if(spritNum ==1) {
-                spritNum = 2;
-            }
-            else if(spritNum == 2) {
-                spritNum = 1;
-            }
-            spriteCounter = 0;
-        }
     }
     public void draw(Graphics2D g2) {
  //       g2.setColor(Color.white);
