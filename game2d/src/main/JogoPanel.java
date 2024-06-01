@@ -2,6 +2,7 @@ package main;
 
 import Entity.Jogador;
 import bloco.TileManager;
+import objeto.ObjetoMaior;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +34,9 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
     TileManager tileManager = new TileManager(this);
     Movimentar keyH = new Movimentar();
     Thread gameThread;
+    public AssetSetter aSetter = new AssetSetter(this);
     public Jogador jogador = new Jogador(this, keyH);
+    public ObjetoMaior obj[] = new ObjetoMaior[10];
 
     public JogoPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -44,45 +47,16 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
 
     }
 
+    public void setupGame() {
+        aSetter.setObject();
+    }
+
     public void startGameThread() {
 
         gameThread = new Thread(this);
         gameThread.start();
     }
 
-    @Override
-//    public void run() {
-//
-//        double drawInterval = 1000000000/FPS; //0.1666 segundos de tempo
-//        double nextDrawTime = System.nanoTime() + drawInterval;
-//
-//        while(gameThread != null) {
-//
-//            update();
-//
-//            repaint();
-//
-//            try {
-//
-//                double remainingTime = nextDrawTime - System.nanoTime();
-//
-//                remainingTime = remainingTime/1000000;
-//
-//                if (remainingTime < 0) {
-//                    remainingTime = 0;
-//                }
-//
-//                Thread.sleep((long)remainingTime);
-//
-//                nextDrawTime += drawInterval;
-//
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//
-//        }
-//    }
     public void run() {
         double drawInterval = 1000000000/FPS;
         double delta = 0;
@@ -127,6 +101,12 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
         Graphics2D g2 = (Graphics2D)g;
 
         TileManager.draw(g2);
+
+        for (int i = 0 ; i < obj.length ; i++) {
+            if (obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
 
         jogador.draw(g2);
 
