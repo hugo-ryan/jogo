@@ -49,6 +49,9 @@ public class TileManager {
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/blocos/caminho.png"));
 
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/blocos/piso.png"));
+
         }catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +101,15 @@ public class TileManager {
             int screenX = worldX - gp.jogador.worldX + gp.jogador.screenX;
             int screenY = worldY - gp.jogador.worldY + gp.jogador.screenY;
 
-            g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            if(worldX + gp.tileSize > gp.jogador.worldX - gp.jogador.screenX &&
+                    worldX - gp.tileSize < gp.jogador.worldX + gp.jogador.screenX &&
+                    worldY + gp.tileSize > gp.jogador.worldY - gp.jogador.screenY &&
+                    worldY - gp.tileSize < gp.jogador.worldY + gp.jogador.screenY) {
+
+                g2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
+            }
+
             worldCol++;
 
             if (worldCol == gp.maxWorldCol) {

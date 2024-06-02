@@ -2,11 +2,13 @@ package main;
 
 import Entity.Jogador;
 import bloco.TileManager;
+import objeto.ObjetoMaior;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 
 public class JogoPanel extends JPanel implements Runnable, KeyListener {
 
@@ -34,7 +36,10 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
     Movimentar keyH = new Movimentar();
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
+
+    public AssetSetter aSetter = new AssetSetter(this);
     public Jogador jogador = new Jogador(this, keyH);
+    public ObjetoMaior obj[] = new ObjetoMaior[10];
 
     public JogoPanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -44,6 +49,11 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
         this.addKeyListener(keyH);
 
     }
+
+    public void setupGame() {
+        aSetter.setObject();
+    }
+
 
     public void startGameThread() {
 
@@ -96,6 +106,12 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
         Graphics2D g2 = (Graphics2D)g;
 
         TileManager.draw(g2);
+
+        for (int i = 0 ; i < obj.length ; i++) {
+            if (obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
 
         jogador.draw(g2);
 
