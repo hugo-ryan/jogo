@@ -9,8 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static java.lang.Math.abs;
-
 public class Jogador extends Entity {
 
     JogoPanel gp;
