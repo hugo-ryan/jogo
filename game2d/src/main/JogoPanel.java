@@ -31,9 +31,10 @@ public class JogoPanel extends JPanel implements Runnable, KeyListener {
     //FPS
     int FPS = 60;
 
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     Movimentar keyH = new Movimentar();
     Thread gameThread;
+    public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Jogador jogador = new Jogador(this, keyH);
     public ObjetoMaior obj[] = new ObjetoMaior[10];
