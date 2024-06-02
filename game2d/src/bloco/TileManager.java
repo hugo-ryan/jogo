@@ -12,9 +12,9 @@ import java.io.InputStreamReader;
 public class TileManager {
 
     static JogoPanel gp;
-    static Tile[] tile;
+    public static Tile[] tile;
 
-    static int[][] mapTileNum;
+    public static int[][] mapTileNum;
 
     public TileManager(JogoPanel gp) {
         this.gp = gp;
@@ -30,16 +30,24 @@ public class TileManager {
         try {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/blocos/grama.png"));
+
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/blocos/parede.png"));
+            tile[1].collision = true;
+
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("/blocos/agua.png"));
-            tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/blocos/agua.png"));
+            tile[2].collision = true;
+
+            //POR ALGUM MOTIVO NÃO TEMOS 3
+
             tile[4] = new Tile();
             tile[4].image = ImageIO.read(getClass().getResourceAsStream("/blocos/arvore.png"));
+            tile[4].collision = true;
+
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/blocos/caminho.png"));
+
             tile[6] = new Tile();
             tile[6].image = ImageIO.read(getClass().getResourceAsStream("/blocos/piso.png"));
 

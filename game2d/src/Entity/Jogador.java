@@ -26,6 +26,8 @@ public class Jogador extends Entity {
         screenX = gp.screenWidth / 2  - (gp.tileSize / 2);
         screenY = gp.screenHeight / 2  - (gp.tileSize / 2);
 
+        collisionMask = new Rectangle(8, 16, 32, 32);
+
         setDefaultValues();
         getJogadorImage();
     }
@@ -54,21 +56,23 @@ public class Jogador extends Entity {
     }
     public void update() {
         if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed){ //Fazer ele parar a animação se não estiver se mexendo.
-            if(keyH.upPressed) {
-                direction = "up";
-                worldY -= speed;
-            }
-            else if(keyH.downPressed) {
-                direction = "down";
-                worldY += speed;
-            }
-            else if(keyH.leftPressed) {
-                direction = "left";
-                worldX -= speed;
-            }
-            else if(keyH.rightPressed) {
-                direction = "right";
-                worldX += speed;
+            //Troca as direções
+            if(keyH.upPressed) {direction = "up";}
+            else if(keyH.downPressed) {direction = "down";}
+            else if(keyH.leftPressed) {direction = "left";}
+            else {direction = "right";}
+
+            //Checando colisão
+            isColliding = false;
+            gp.cChecker.checkTile(this);
+
+            if(!isColliding){
+                switch (direction){
+                    case "up": worldY -= speed; break;
+                    case "down": worldY += speed; break;
+                    case "left": worldX -= speed; break;
+                    case "right": worldX += speed; break;
+                }
             }
 
             spriteCounter++;
@@ -85,10 +89,6 @@ public class Jogador extends Entity {
 
     }
     public void draw(Graphics2D g2) {
- //       g2.setColor(Color.white);
-
-//        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
         BufferedImage image = null;
 
         switch (direction) {
@@ -129,5 +129,8 @@ public class Jogador extends Entity {
                 break;
         }
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        //Ver a máscara de colisão (Se quiser tirar só comentar essas duas linhas)
+        g2.setColor(Color.red);
+        g2.drawRect(screenX + collisionMask.x, screenY + collisionMask.y, collisionMask.width, collisionMask.height);
     }
 }
